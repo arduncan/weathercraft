@@ -1,0 +1,31 @@
+.col-md-4.col-md-offset-4
+  .h1 weathercraft
+  %p Search for a city!
+
+  .input-group
+    %input.form-control{ type: 'text', name: 'city', id: 'city' }
+    %span.input-group-btn
+      %button.btn.btn-primary{ onClick: 'searchCities()' }
+        Go!
+
+:javascript
+  function searchCities() {
+    var city_name = $('#city').val();
+    var request = new XMLHttpRequest();
+    var url = 'https://www.metaweather.com/api/location/search/?query=' + city_name;
+
+    request.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        var response = JSON.parse(this.responseText);
+        getElements(response);
+      }
+    }
+
+    request.open("GET", url, true);
+    request.setRequestHeader("Access-Control-Allow-Origin", "*");
+    request.send();
+  }
+
+  getElements = function(response) {
+    response;
+  }
