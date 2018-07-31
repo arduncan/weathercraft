@@ -1,4 +1,4 @@
-<%= @lat, @long = split_lat_long(@forecast['latt_long']) %>
+<% @lat, @long = split_lat_long(@forecast['latt_long']) %>
 
 <div class="col-md-4 col-md-offset-4">
   <div id="map" style="height: 400px; width: 100%;"></div>
@@ -9,8 +9,8 @@
         <img class="card-img-top" src=<%= "https://www.metaweather.com/static/img/weather/png/64/#{day['weather_state_abbr']}.png" %> alt="<%= day['weather_state_name'] %>">
         <div class="card-body">
           <h5 class="card-title"><%= "#{format_day(day['applicable_date'])} - #{day['weather_state_name']}" %></h5>
-          Max: <%= convert_to_fahrenheit(day['max_temp']) %> f <br>
-          Min: <%= convert_to_fahrenheit(day['min_temp']) %> f <br>
+          High: <%= convert_to_fahrenheit(day['max_temp']) %> f <br>
+          Low:  <%= convert_to_fahrenheit(day['min_temp']) %> f <br>
         </div>
       </div>
       <hr>
