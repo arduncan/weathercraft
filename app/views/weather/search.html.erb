@@ -1,0 +1,10 @@
+<div class="col-md-4 col-md-offset-4 list-group">
+  <% if @cities.present? %>
+    <h3>cities</h3>
+    <% @cities.each do |city| %>
+      <%= link_to city['title'], forecast_path(:id => city['woeid']), { :class => "list-group-item list-group-item-action" } %>
+    <% end %>
+  <% else %>
+    <h2>'<%= params[:search] %>' ain't no city I ever heard of.</h2>
+  <% end %>
+</div>

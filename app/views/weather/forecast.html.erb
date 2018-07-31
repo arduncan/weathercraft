@@ -1,0 +1,32 @@
+<%= @lat, @long = split_lat_long(@forecast['latt_long']) %>
+
+<div class="col-md-4 col-md-offset-4">
+  <div id="map" style="height: 400px; width: 100%;"></div>
+  <h3>weather in <%= @forecast['title'] %></h3>
+  <div class="card-deck">
+    <% @forecast['consolidated_weather'].each do |day| %>
+      <div class="card">
+        <img class="card-img-top" src=<%= "https://www.metaweather.com/static/img/weather/png/64/#{day['weather_state_abbr']}.png" %> alt="<%= day['weather_state_name'] %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= "#{format_day(day['applicable_date'])} - #{day['weather_state_name']}" %></h5>
+          Max: <%= convert_to_fahrenheit(day['max_temp']) %> f <br>
+          Min: <%= convert_to_fahrenheit(day['min_temp']) %> f <br>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+
+  <script>
+      // Initialize and add the map
+      function initMap() {
+          var city = {lat: <%= @lat %>, lng: <%= @long %>};
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 6, center: city});
+          var marker = new google.maps.Marker({position: city, map: map});
+      }
+  </script>
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVMJRNkjHApNI51InZ80QOsmNnxE7HvNY&callback=initMap">
+  </script>
+</div>
